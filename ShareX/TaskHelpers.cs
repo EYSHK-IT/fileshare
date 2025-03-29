@@ -47,6 +47,7 @@ using ZXing;
 using ZXing.Common;
 using ZXing.QrCode;
 using ZXing.Rendering;
+using ZXing.Windows.Compatibility;
 
 namespace ShareX
 {
@@ -2229,6 +2230,7 @@ namespace ShareX
                             NoPadding = false,
                             Margin = 1
                         },
+                        Renderer = new BitmapRenderer()
                     };
 
                     return writer.Write(text);
