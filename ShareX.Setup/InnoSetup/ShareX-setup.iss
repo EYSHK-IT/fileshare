@@ -20,7 +20,7 @@ AppPublisherURL={#MyAppURL}
 AppVerName={#MyAppName} {#MyAppVersion}
 AppVersion={#MyAppVersion}
 ArchitecturesAllowed=x64os arm64 x86
-ArchitecturesInstallIn64BitMode=x64os arm64
+ArchitecturesInstallIn64BitMode=x64os
 DefaultDirName={commonpf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
@@ -138,7 +138,8 @@ end;
 
 function InitializeSetup(): Boolean;
 begin
-  Dependency_AddDotNet48;
+  Dependency_AddDotNet8;
+  Dependency_AddDotNet8Desktop;
   Result := true;
 end;
 
