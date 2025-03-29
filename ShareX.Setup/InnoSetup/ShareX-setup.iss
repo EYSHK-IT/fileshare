@@ -4,6 +4,7 @@
 #define MyAppReleaseDirectory MyAppRootDirectory + "\" + MyAppName + "\bin\Release"
 #define MyAppFileName MyAppName + ".exe"
 #define MyAppFilePath MyAppReleaseDirectory + "\" + MyAppFileName
+#define MyAppDllPath MyAppReleaseDirectory + "\" + MyAppName + ".dll"
 #define MyAppVersion GetStringFileInfo(MyAppFilePath, "ProductVersion")
 #define MyAppPublisher "ShareX Team"
 #define MyAppURL "https://getsharex.com"
@@ -45,12 +46,12 @@ Name: "DisablePrintScreenKeyForSnippingTool"; Description: "Disable Print Screen
 
 [Files]
 Source: "{#MyAppFilePath}"; DestDir: {app}; Flags: ignoreversion
-Source: "{#MyAppFilePath}.config"; DestDir: {app}; Flags: ignoreversion
+Source: "{#MyAppDllPath}.config"; DestDir: {app}; Flags: ignoreversion
 Source: "{#MyAppReleaseDirectory}\*.dll"; DestDir: {app}; Flags: ignoreversion
 Source: "{#MyAppRootDirectory}\Licenses\*.txt"; DestDir: {app}\Licenses; Flags: ignoreversion
 Source: "{#MyAppOutputDirectory}\Recorder-devices-setup.exe"; DestDir: {app}; Flags: ignoreversion
 Source: "{#MyAppOutputDirectory}\ffmpeg.exe"; DestDir: {app}; Flags: ignoreversion
-Source: "{#MyAppReleaseDirectory}\ShareX_NativeMessagingHost.exe"; DestDir: {app}; Flags: ignoreversion
+Source: "{#MyAppReleaseDirectory}\ShareX_NativeMessagingHost.dll"; DestDir: {app}; Flags: ignoreversion
 Source: "{#MyAppReleaseDirectory}\host-manifest-chrome.json"; DestDir: {app}; Flags: ignoreversion
 Source: "{#MyAppReleaseDirectory}\host-manifest-firefox.json"; DestDir: {app}; Flags: ignoreversion
 Source: "{#MyAppReleaseDirectory}\ar-YE\*.resources.dll"; DestDir: {app}\Languages\ar-YE; Flags: ignoreversion

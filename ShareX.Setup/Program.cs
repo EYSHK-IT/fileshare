@@ -359,7 +359,7 @@ namespace ShareX.Setup
             Directory.CreateDirectory(destination);
 
             FileHelpers.CopyFiles(Path.Combine(source, "ShareX.exe"), destination);
-            FileHelpers.CopyFiles(Path.Combine(source, "ShareX.exe.config"), destination);
+            FileHelpers.CopyFiles(Path.Combine(source, "ShareX.dll.config"), destination);
             FileHelpers.CopyFiles(source, destination, "*.dll");
 
             if (job == SetupJobs.CreateDebug || job == SetupJobs.CreateMicrosoftStoreDebugFolder)
