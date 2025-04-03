@@ -20,7 +20,7 @@ AppPublisherURL={#MyAppURL}
 AppVerName={#MyAppName} {#MyAppVersion}
 AppVersion={#MyAppVersion}
 ArchitecturesAllowed=x64os arm64 x86
-ArchitecturesInstallIn64BitMode=x64os
+ArchitecturesInstallIn64BitMode=x64os arm64
 DefaultDirName={commonpf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
@@ -48,6 +48,7 @@ Name: "DisablePrintScreenKeyForSnippingTool"; Description: "Disable Print Screen
 Source: "{#MyAppFilePath}"; DestDir: {app}; Flags: ignoreversion
 Source: "{#MyAppDllPath}.config"; DestDir: {app}; Flags: ignoreversion
 Source: "{#MyAppReleaseDirectory}\*.dll"; DestDir: {app}; Flags: ignoreversion
+Source: "{#MyAppReleaseDirectory}\*.json"; DestDir: {app}; Flags: ignoreversion
 Source: "{#MyAppRootDirectory}\Licenses\*.txt"; DestDir: {app}\Licenses; Flags: ignoreversion
 Source: "{#MyAppOutputDirectory}\Recorder-devices-setup.exe"; DestDir: {app}; Flags: ignoreversion
 Source: "{#MyAppOutputDirectory}\ffmpeg.exe"; DestDir: {app}; Flags: ignoreversion
