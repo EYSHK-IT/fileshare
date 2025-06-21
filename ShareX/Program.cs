@@ -281,6 +281,7 @@ namespace ShareX
 
             DebugHelper.Init(LogsFilePath);
 
+            IsAdmin = Helpers.IsAdministrator();
             MultiInstance = CLI.IsCommandExist("multi", "m");
 
             using (SingleInstanceManager singleInstanceManager = new SingleInstanceManager(MutexName, PipeName, !MultiInstance, args))
@@ -328,7 +329,6 @@ namespace ShareX
                 DebugHelper.WriteLine("Personal path detection method: " + PersonalPathDetectionMethod);
             }
             DebugHelper.WriteLine("Operating system: " + Helpers.GetOperatingSystemProductName(true));
-            IsAdmin = Helpers.IsAdministrator();
             DebugHelper.WriteLine("Running as elevated process: " + IsAdmin);
 
             SilentRun = CLI.IsCommandExist("silent", "s");

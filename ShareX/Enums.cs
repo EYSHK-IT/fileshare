@@ -298,7 +298,13 @@ namespace ShareX
         [Category(EnumExtensions.HotkeyType_Category_Tools)]
         QRCodeDecodeFromScreen,
         [Category(EnumExtensions.HotkeyType_Category_Tools)]
+        QRCodeScanRegion,
+        [Category(EnumExtensions.HotkeyType_Category_Tools)]
         HashCheck,
+        [Category(EnumExtensions.HotkeyType_Category_Tools)]
+        Metadata,
+        [Category(EnumExtensions.HotkeyType_Category_Tools)]
+        StripMetadata,
         [Category(EnumExtensions.HotkeyType_Category_Tools)]
         IndexFolder,
         [Category(EnumExtensions.HotkeyType_Category_Tools)]
@@ -344,7 +350,8 @@ namespace ShareX
         OpenFolder,
         OpenUrl,
         Upload,
-        PinToScreen
+        PinToScreen,
+        DeleteFile
     }
 
     public enum ThumbnailViewClickAction // Localized

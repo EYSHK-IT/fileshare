@@ -45,7 +45,7 @@ namespace ShareX
 {
     public static class OCRHelper
     {
-        private const string SupportedVersion = "10.0.18362.0";
+        private const string SupportedVersion = "10.0.26100.0";
 
         public static bool IsSupported
         {

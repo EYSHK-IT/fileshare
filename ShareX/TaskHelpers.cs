@@ -304,10 +304,26 @@ namespace ShareX
                     }
                     break;
                 case HotkeyType.QRCodeDecodeFromScreen:
-                    OpenQRCodeDecodeFromScreen();
+                    OpenQRCodeScanScreen();
+                    break;
+                case HotkeyType.QRCodeScanRegion:
+                    OpenQRCodeScanRegion();
                     break;
                 case HotkeyType.HashCheck:
                     OpenHashCheck(filePath, safeTaskSettings);
+                    break;
+                case HotkeyType.Metadata:
+                    OpenMetadataWindow(filePath);
+                    break;
+                case HotkeyType.StripMetadata:
+                    if (!string.IsNullOrEmpty(filePath))
+                    {
+                        StripMetadata(filePath, safeTaskSettings);
+                    }
+                    else
+                    {
+                        StripMetadata(safeTaskSettings);
+                    }
                     break;
                 case HotkeyType.IndexFolder:
                     UploadManager.IndexFolder();
@@ -898,6 +914,55 @@ namespace ShareX
             hashCheckerForm.Show();
         }
 
+        public static void OpenMetadataWindow(string filePath = null)
+        {
+            if (!CheckExifTool())
+            {
+                return;
+            }
+
+            MetadataForm metadataForm = new MetadataForm(filePath);
+            metadataForm.Show();
+        }
+
+        public static bool StripMetadata(TaskSettings taskSettings = null)
+        {
+            string filePath = FileHelpers.BrowseFile();
+
+            if (!string.IsNullOrEmpty(filePath))
+            {
+                return StripMetadata(filePath, taskSettings);
+            }
+
+            return false;
+        }
+
+        public static bool StripMetadata(string filePath = null, TaskSettings taskSettings = null)
+        {
+            if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
+
+            if (!CheckExifTool())
+            {
+                return false;
+            }
+
+            try
+            {
+                MetadataForm.StripFileMetadata(filePath);
+
+                PlayNotificationSoundAsync(NotificationSound.ActionCompleted, taskSettings);
+            }
+            catch (Exception e)
+            {
+                DebugHelper.WriteException(e);
+                e.ShowError();
+
+                return false;
+            }
+
+            return true;
+        }
+
         public static void OpenDirectoryIndexer(TaskSettings taskSettings = null)
         {
             if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
@@ -1371,9 +1436,14 @@ namespace ShareX
             QRCodeForm.OpenFormScanFromImageFile(filePath).Show();
         }
 
-        public static void OpenQRCodeDecodeFromScreen()
+        public static void OpenQRCodeScanScreen()
         {
-            QRCodeForm.OpenFormScanFromScreen();
+            QRCodeForm.OpenFormScanScreen();
+        }
+
+        public static void OpenQRCodeScanRegion()
+        {
+            QRCodeForm.OpenFormScanRegion();
         }
 
         public static void OpenRuler(TaskSettings taskSettings = null)
@@ -1659,6 +1729,22 @@ namespace ShareX
             return true;
         }
 
+        public static bool CheckExifTool()
+        {
+            string exifToolPath = FileHelpers.GetAbsolutePath("exiftool.exe");
+
+            if (!File.Exists(exifToolPath))
+            {
+                // TODO: Translate
+                MessageBox.Show("ExifTool does not exist at the following path:" + "\r\n" + exifToolPath,
+                    "ShareX - " + "ExifTool is missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                return false;
+            }
+
+            return true;
+        }
+
         public static void PlayNotificationSoundAsync(NotificationSound notificationSound, TaskSettings taskSettings = null)
         {
             if (taskSettings == null) taskSettings = TaskSettings.GetDefaultTaskSettings();
@@ -1874,7 +1960,10 @@ namespace ShareX
                     case HotkeyType.OCR: return ShareXResources.IsDarkTheme ? Resources.edit_drop_cap_white : Resources.edit_drop_cap;
                     case HotkeyType.QRCode: return ShareXResources.IsDarkTheme ? Resources.barcode_2d_white : Resources.barcode_2d;
                     case HotkeyType.QRCodeDecodeFromScreen: return ShareXResources.IsDarkTheme ? Resources.barcode_2d_white : Resources.barcode_2d;
+                    case HotkeyType.QRCodeScanRegion: return ShareXResources.IsDarkTheme ? Resources.barcode_2d_white : Resources.barcode_2d;
                     case HotkeyType.HashCheck: return Resources.application_task;
+                    case HotkeyType.Metadata: return Resources.tag_hash;
+                    case HotkeyType.StripMetadata: return Resources.tag__minus;
                     case HotkeyType.IndexFolder: return Resources.folder_tree;
                     case HotkeyType.ClipboardViewer: return Resources.clipboard_block;
                     case HotkeyType.BorderlessWindow: return Resources.application_resize_full;

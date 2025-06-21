@@ -14,4 +14,9 @@
     <PackageReference Include="System.Management" Version="9.0.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Controls\CustomVScrollBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
 </Project>
